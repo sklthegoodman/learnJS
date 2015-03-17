@@ -75,3 +75,21 @@ function client (){
 		system:system
 	}
 }
+
+
+//遍历元素特性
+function outputAttributes(elem){
+	var arr = [],
+		attName,
+		attValue,
+		i,
+		lenth;
+	for(i=0;i<elem.attributes.length;i++){
+		attName = elem.attributes[i].nodeName;
+		attValue = elem.attributes[i].nodeValue;
+		if(elem.attributes[i].specified){	//验证IE中属性已经被指定
+			arr.push(attName+'="'+attValue+'"');
+		}
+	}
+	return arr.join(' ');
+}
