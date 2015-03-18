@@ -1,4 +1,4 @@
-//在任何浏览器上测试任何对象的某个特性是否存在
+/*在任何浏览器上测试任何对象的某个特性是否存在*/
 function isHostMethod (obj,property){
 	var t = typeof obj[property];
 	return t == 'function' || 
@@ -6,7 +6,8 @@ function isHostMethod (obj,property){
 		t == 'unknown';	//IE 的ActiveXObject的open方法会返回unknow
 }
 
-//userAgent用户代理检测
+
+/*userAgent用户代理检测*/
 function client (){
 	//呈现引擎储存的obj
 	var engine = {
@@ -77,7 +78,7 @@ function client (){
 }
 
 
-//遍历元素特性
+/*遍历元素特性*/
 function outputAttributes(elem){
 	var arr = [],
 		attName,
@@ -92,4 +93,25 @@ function outputAttributes(elem){
 		}
 	}
 	return arr.join(' ');
+}
+
+/*动态脚本*/
+//动态载入外部脚本
+function loadScript(url){
+	var script = document.createElement('script');
+	script.type = "text/javascript";
+	script.url = url;
+	document.body.appendChild(script);
+}
+
+//动态载入内部脚本(可代替eval()函数)
+function loadScriptStr(code){
+	var script = document.createElement('script');
+	script.type = 'text/javascript';
+	try{
+		script.appendChild(document.createTextNode(code));
+	}catch(ex){
+		script.text = code;
+	}
+	document.body.appendChild(script);
 }
