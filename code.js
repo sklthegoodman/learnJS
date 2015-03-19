@@ -95,6 +95,7 @@ function outputAttributes(elem){
 	return arr.join(' ');
 }
 
+
 /*动态脚本*/
 //动态载入外部脚本
 function loadScript(url){
@@ -114,4 +115,45 @@ function loadScriptStr(code){
 		script.text = code;
 	}
 	document.body.appendChild(script);
+}
+
+
+/*切换class,在IE10+的情况下，完全可以用classList*/
+function toggleClass(elem,className){
+	if(elem.classList){
+		var classList = elem.classList;
+		classList.toggle(className);
+	}else{
+		var classList = elem.className.split(/\s+/);
+		var i,len;
+		for(i=0,len=classList.length;i<len;i++){
+			if(classList[i] == className){
+				break;
+			}
+		}
+		if(i==len){
+			classList.push(className);
+		}else{
+			classList.splice(i,1);
+		}
+		elem.className = classList.join(' ');
+	}
+}
+
+
+/*检测节点是否包含另外节点*/
+function contains(node,otherNode){
+	if(typeof node.contains == 'function'){
+		return node.contains(otherNode);
+	}else{
+		var pNode = otherNode.parentNode;
+		do{
+			if(node == pNode){
+				return true;
+			}else{
+				pNode = pNode.parentNode;
+			}
+		}while(pNode != null);
+		return false;
+	}
 }
