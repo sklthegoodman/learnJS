@@ -157,3 +157,24 @@ function contains(node,otherNode){
 		return false;
 	}
 }
+
+
+/*获得节点相对于视口的偏移量*/
+function getElementLeft(elem){
+	var left = elem.offsetLeft;
+	var parent = elem.offsetParent;
+	while(parent != null){
+		left += parent.offsetLeft;
+		parent = parent.offsetParent;
+	}
+	return left;
+}
+function getElementTop(elem){
+	var top = elem.offsetTop;
+	var parent = elem.offsetParent;
+	while(parent != null){
+		top += parent.offsetTop;
+		parent = parent.offsetParent;
+	}
+	return top;
+}
